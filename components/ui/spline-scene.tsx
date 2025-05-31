@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "react"
 import dynamic from "next/dynamic"
 
 // Dynamically import Spline with no SSR to avoid server-side errors
-const Spline = dynamic(() => import("@splinetool/react-spline"), {
+const Spline = dynamic(() => import("@splinetool/react-spline").then((mod) => mod.default), {
   ssr: false,
 })
 

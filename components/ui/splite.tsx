@@ -1,7 +1,7 @@
 "use client"
 
 import { Suspense, lazy, useState } from "react"
-const Spline = lazy(() => import("@splinetool/react-spline"))
+const Spline = lazy(() => import("@splinetool/react-spline").then((mod) => mod.default))
 
 interface SplineSceneProps {
   scene: string
@@ -24,7 +24,7 @@ export function SplineScene({ scene, className, onLoad }: SplineSceneProps) {
       fallback={
         <div className="w-full h-full flex items-center justify-center bg-black">
           <div className="flex flex-col items-center">
-            <span className="loader"></span>
+            <div className="w-10 h-10 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin"></div>
             <p className="mt-4 text-white text-sm">Loading interactive robot...</p>
           </div>
         </div>
