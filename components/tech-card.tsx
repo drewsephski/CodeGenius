@@ -24,17 +24,20 @@ import dynamic from "next/dynamic"
 import { useRobotInteraction } from "@/hooks/use-robot-interaction"
 
 // Dynamically import the SplineScene component to reduce initial bundle size
-const SplineScene = dynamic(() => import("@/components/ui/spline-scene").then((mod) => mod.SplineScene), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-lg">
-      <div className="flex flex-col items-center">
-        <div className="w-10 h-10 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin"></div>
-        <p className="mt-4 text-sm text-gray-400">Loading interactive robot...</p>
+const SplineScene = dynamic(
+  () => import("@/components/ui/spline-scene").then((mod) => ({ default: mod.SplineScene })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center bg-black/50 backdrop-blur-sm rounded-lg">
+        <div className="flex flex-col items-center">
+          <div className="w-10 h-10 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin"></div>
+          <p className="mt-4 text-sm text-gray-400">Loading interactive robot...</p>
+        </div>
       </div>
-    </div>
-  ),
-})
+    ),
+  },
+)
 
 /**
  * Main landing page component for AI Code Generation SaaS
